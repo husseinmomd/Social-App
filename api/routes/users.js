@@ -69,7 +69,7 @@ router.get("/friends/:userId", async (req, res) => {
       const { _id, username, profilePicture } = friend;
       friendList.push({ _id, username, profilePicture });
     });
-    res.status(200).json(friendList)
+    res.status(200).json(friendList);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -118,5 +118,20 @@ router.put("/:id/unfollow", async (req, res) => {
     res.status(403).json("you cant unfollow yourself");
   }
 });
+// edit profie
 
+router.post("/updateProfile", async (req, res) => {
+  const { userId, data } = req.body;
+  console.log(req.body);
+  if (!userId || !data) {
+    res.status(400);
+    return;
+  }
+
+  const updatedUser = await User.findByIdAndUpdate({ _id: userId }, data, {
+    new: true,
+  });
+
+  res.status(200).json({ updatedUser });
+});
 module.exports = router;

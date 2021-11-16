@@ -19,6 +19,10 @@ export default function Share({ fetchPosts }) {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    if (!file && desc.current.value === "") {
+      return toast.error("image or description is required for post");
+    }
+
     const newPost = {
       userId: user._id,
       desc: desc.current.value,

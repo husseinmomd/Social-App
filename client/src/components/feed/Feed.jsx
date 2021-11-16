@@ -20,7 +20,7 @@ export default function Feed({ username }) {
   };
   useEffect(() => {
     fetchPosts();
-  }, [username, user._id]);
+  }, [username, user._id, posts]);
 
   return (
     <div className="feed">

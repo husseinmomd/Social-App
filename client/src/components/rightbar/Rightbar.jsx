@@ -12,10 +12,13 @@ export default function Rightbar({ user }) {
   const [friends, setFriends] = useState([]);
   const { user: currentUser, dispatch } = useContext(AuthContext);
   const [followed, setFollowed] = useState(
-    currentUser.followings.includes(user?.id)
+    currentUser.followings.includes(user?._id)
   );
 
+  const editProfile = () => {};
+  console.log(currentUser.followings.includes(user?._id));
   useEffect(() => {
+    setFollowed(currentUser.followings.includes(user?._id));
     const getFriends = async () => {
       try {
         const friendList = await axios.get("/users/friends/" + user._id);
@@ -24,7 +27,9 @@ export default function Rightbar({ user }) {
         console.log(err);
       }
     };
-    getFriends();
+    if (user && user._id) {
+      getFriends();
+    }
   }, [user]);
 
   const handleClick = async () => {
@@ -41,8 +46,7 @@ export default function Rightbar({ user }) {
         dispatch({ type: "FOLLOW", payload: user._id });
       }
       setFollowed(!followed);
-    } catch (err) {
-    }
+    } catch (err) {}
   };
 
   const HomeRightbar = () => {
@@ -74,7 +78,19 @@ export default function Rightbar({ user }) {
             {followed ? <Remove /> : <Add />}
           </button>
         )}
-        <h4 className="rightbarTitle">User information</h4>
+
+        <div
+          style={{
+            flexWrap: "wrap",
+            alignItems: "center",
+            display: "flex",
+            flexDirection: "row",
+          }}
+        >
+          <h4 className="rightbarTitle">User information</h4>
+          <button onclick={() => editProfile()}>+</button>
+        </div>
+
         <div className="rightbarInfo">
           <div className="rightbarInfoItem">
             <span className="rightbarInfoKey">City:</span>
@@ -97,8 +113,9 @@ export default function Rightbar({ user }) {
         </div>
         <h4 className="rightbarTitle">User friends</h4>
         <div className="rightbarFollowings">
-          {friends.map((friend) => (
+          {friends.map((friend, idx) => (
             <Link
+              key={idx}
               to={"/profile/" + friend.username}
               style={{ textDecoration: "none" }}
             >
