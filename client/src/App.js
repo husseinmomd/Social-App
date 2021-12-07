@@ -12,6 +12,7 @@ import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import EditProfieInfo from "./components/editProfile/EditProfieInfo";
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -28,6 +29,9 @@ function App() {
           </Route>
           <Route path="/profile/:username">
             <Profile />
+          </Route>
+          <Route path="/edit/:userId">
+            <EditProfieInfo />
           </Route>
         </Switch>
       </Router>
