@@ -15,7 +15,6 @@ export default function Rightbar({ user }) {
     currentUser.followings.includes(user?._id)
   );
 
-  const editProfile = () => {};
   console.log(currentUser.followings.includes(user?._id));
   useEffect(() => {
     setFollowed(currentUser.followings.includes(user?._id));
@@ -55,10 +54,10 @@ export default function Rightbar({ user }) {
         <div className="birthdayContainer">
           <img className="birthdayImg" src="assets/gift.png" alt="" />
           <span className="birthdayText">
-            <b>Pola Foster</b> and <b>3 other friends</b> have a birhday today.
+            <b>You </b> and <b>3 other friends</b> have a birhday today.
           </span>
         </div>
-        <img className="rightbarAd" src="assets/ad.png" alt="" />
+        <img className="rightbarAd" src="assets/ad.jpg" alt="" />
         <h4 className="rightbarTitle">Online Friends</h4>
         <ul className="rightbarFriendList">
           {Users.map((u) => (
@@ -70,6 +69,7 @@ export default function Rightbar({ user }) {
   };
 
   const ProfileRightbar = () => {
+    function editProfile() {}
     return (
       <>
         {user.username !== currentUser.username && (
@@ -88,7 +88,8 @@ export default function Rightbar({ user }) {
           }}
         >
           <h4 className="rightbarTitle">User information</h4>
-          <button onclick={() => editProfile()}>+</button>
+
+          <button onClick={editProfile}>+</button>
         </div>
 
         <div className="rightbarInfo">
@@ -100,7 +101,7 @@ export default function Rightbar({ user }) {
             <span className="rightbarInfoKey">From:</span>
             <span className="rightbarInfoValue">{user.from}</span>
           </div>
-          <div className="rightbarInfoItem">
+          {/* <div className="rightbarInfoItem">
             <span className="rightbarInfoKey">Relationship:</span>
             <span className="rightbarInfoValue">
               {user.relationship === 1
@@ -109,7 +110,7 @@ export default function Rightbar({ user }) {
                 ? "Married"
                 : "-"}
             </span>
-          </div>
+          </div> */}
         </div>
         <h4 className="rightbarTitle">User friends</h4>
         <div className="rightbarFollowings">

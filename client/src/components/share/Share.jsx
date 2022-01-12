@@ -43,9 +43,9 @@ export default function Share({ fetchPosts }) {
     try {
       await axios.post("/posts", newPost);
       fetchPosts();
-      toast.success("post added");
+      toast.success("Post Added");
     } catch (err) {
-      console.log(err);
+      console.log(err.msg);
     }
     setFile(null);
     desc.current.value = "";
@@ -68,6 +68,7 @@ export default function Share({ fetchPosts }) {
             placeholder={"What's in your mind " + user.username + "?"}
             className="shareInput"
             ref={desc}
+            name=" name"
           />
         </div>
         <hr className="shareHr" />

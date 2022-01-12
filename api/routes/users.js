@@ -124,7 +124,7 @@ router.post("/updateProfile", async (req, res) => {
   const { userId, data } = req.body;
   console.log(req.body);
   if (!userId || !data) {
-    res.status(400);
+    res.status(400).json({ msg: "error" });
     return;
   }
 

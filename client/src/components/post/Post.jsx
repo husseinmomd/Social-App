@@ -63,21 +63,28 @@ export default function Post({ post, fetchPosts }) {
       }
     });
   };
+  const fetchUser = async () => {
+    const res = await axios.get(`/users?userId=${post.userId}`);
+    setUser(res.data);
+  };
   useEffect(() => {
-    const fetchUser = async () => {
-      const res = await axios.get(`/users?userId=${post.userId}`);
-      setUser(res.data);
-    };
     fetchUser();
   }, [post.userId]);
 
   const likeHandler = () => {
     try {
       axios.put("/posts/" + post._id + "/like", { userId: currentUser._id });
-    } catch (err) {}
-    setLike(isLiked ? like - 1 : like + 1);
-    setIsLiked(!isLiked);
+      setLike(isLiked ? like - 1 : like + 1);
+      setIsLiked(!isLiked);
+    } catch (err) {
+      console.log(err);
+    }
   };
+
+  const editPost = () => {
+    console.log("clicked");
+  };
+
   return (
     <div className="post">
       <div className="postWrapper">
@@ -106,7 +113,10 @@ export default function Post({ post, fetchPosts }) {
                 onClick={deletePost}
                 style={{ cursor: "pointer", color: "grey" }}
               ></Delete>
-              <Edit style={{ cursor: "pointer", color: "grey" }}></Edit>
+              <Edit
+                onClick={editPost}
+                style={{ cursor: "pointer", color: "grey" }}
+              ></Edit>
             </div>
           )}
         </div>

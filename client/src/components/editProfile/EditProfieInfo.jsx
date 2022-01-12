@@ -2,7 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { useParams } from "react-router";
 import axios from "axios";
+// import { browserHistory } from "react-router";
 export default function EditProfieInfo() {
+  // const navigate = useNavigate();
   const { user: currentUser } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     city: currentUser.city,
@@ -11,8 +13,10 @@ export default function EditProfieInfo() {
 
   const { userId } = useParams();
   console.log(userId);
+
   function updateInfo(e) {
     e.preventDefault();
+
     axios
       .post(`http://localhost:8800/api/users/updateProfile`, {
         userId: currentUser._id,
@@ -21,6 +25,7 @@ export default function EditProfieInfo() {
           from: formData.from,
         },
       })
+
       .then((res) => {
         console.log(res);
       })
@@ -28,6 +33,10 @@ export default function EditProfieInfo() {
         console.log(error);
       });
   }
+  const goBack = (e) => {
+    e.preventDefault();
+    window.location("/");
+  };
   return (
     <div
       style={{
@@ -80,6 +89,7 @@ export default function EditProfieInfo() {
           <button onClick={(e) => updateInfo(e)} style={{ cursor: "pointer" }}>
             save Changes
           </button>
+          <button onClick={(e) => goBack(e)}>Go Back To Profile</button>
         </form>
       </div>
     </div>
