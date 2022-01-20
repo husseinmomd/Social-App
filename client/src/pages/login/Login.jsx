@@ -29,7 +29,7 @@ export default function Login() {
         <div className="loginLeft">
           <h3 className="loginLogo">Social App</h3>
           <span className="loginDesc">
-            Connect with friends and the world around you on Lamasocial.
+            Connect with friends and the world around you.
           </span>
         </div>
         <div className="loginRight">

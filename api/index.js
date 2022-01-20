@@ -17,7 +17,7 @@ dotenv.config();
 mongoose
   .connect(process.env.ONLINE_DB)
   .then(() => {
-    console.log("CONNECTED");
+    console.log("CONNECTED✅");
   })
   .catch((err) => console.log(err));
 app.use("/images", express.static(path.join(__dirname, "public/images")));
